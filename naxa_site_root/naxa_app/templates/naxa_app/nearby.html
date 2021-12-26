@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if message %}
+{{ message }}
+<br />
+<br />
+{% endif %}
+
+<form method="POST" action="{% url 'nearby' %}">
+    {% csrf_token %}
+    Enter Coordinate -> Format: 27.690069,85.335646 Lat,Long:
+    <br />
+    <input type="text" name="coordinate" />
+    <br />
+    <h1></h1>
+    <input class="btn btn-primary" type="submit" value="Submit" />
+    <br />
+</form>
+
+
+{% endblock %}

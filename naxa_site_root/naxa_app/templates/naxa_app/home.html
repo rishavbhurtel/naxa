@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if message %}
+  {{ message }}
+{% endif %}
+
+{% if user.is_authenticated %}
+  Hello {{ user.first_name}} {{ user.last_name }}.
+  <p>You are from country {{ user.profile.country }}.</p>
+  <p>Your Contact Number is {{ user.profile.phonenumber}}</p>
+  <p><a href="{% url 'geo_json' %}">Get Line Vector Between Home and Office</a></p>
+  <p><a href="{% url 'nearby' %}">Show Nearby</a></p>
+{% else %}
+  <p>You are not Logged in.</p>
+{% endif %}
+
+{% endblock %}

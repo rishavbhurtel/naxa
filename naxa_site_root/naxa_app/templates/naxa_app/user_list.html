@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Covid List</title>
+</head>
+
+<body>
+    <h2><p>Users Information</p></h2>
+    <table border="1">
+        <tr style="height:20px;">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Country</th>
+            <th>Interest</th>
+        </tr>
+        {% if page_obj %}
+        {% for entries in page_obj %}
+        <tr style="height:20px;">
+            <td>{{entries.first_name}}</td>
+            <td>{{entries.last_name}}</td>
+            <td>{{entries.email}}</td>
+            <td>{{entries.profile.country}}</td>
+            <td>{{entries.profile.interest}}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <p>No lists are available.</p>
+        {% endif %}
+    </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+
+</html>
+{% endblock %}
